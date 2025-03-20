@@ -1,6 +1,9 @@
-import test from "./test.js";
+import App from './App.js';
 
-// Initialize theme components
-document.addEventListener("DOMContentLoaded", () => {
-    test();
-});
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', () => {
+		window.app = new App();
+	});
+} else {
+	window.app = new App();
+}

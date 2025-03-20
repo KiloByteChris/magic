@@ -1,3 +1,7 @@
-export default function test() {
-    console.log('test');
+class Test {
+	constructor(el) {
+        console.log('test');
+    }
 }
+
+export default Test;
