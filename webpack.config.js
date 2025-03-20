@@ -1,32 +1,45 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/js/main.js', // Main JS file
+  entry: {
+    main: './src/js/main.js',  // JS entry
+    styles: './src/scss/main.scss', // SCSS entry (separate from JS)
+  },
   output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'), // Output folder
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
       {
-        test: /\.js$/, // Apply Babel to JS files
+        test: /\.js$/, // Babel loader
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+            presets: ['@babel/preset-env'],
+          },
+        },
       },
       {
-        test: /\.scss$/, // Compile SCSS to CSS
-        use: ['style-loader', 'css-loader', 'sass-loader']
-      }
-    ]
+        test: /\.scss$/, // SCSS to CSS
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+    ],
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'style.css', // Outputs CSS file in dist/
+    }),
+  ],
   devServer: {
-    static: path.resolve(__dirname, 'dist'), // Serve files from "dist"
-    hot: true // Enable hot module replacement
-  }
+    static: path.resolve(__dirname, 'dist'),
+    hot: true,
+  },
 };

@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 
 function mytheme_enqueue_scripts() {
     wp_enqueue_script(
-        'mytheme-main-js',
+        'magic-main-js',
         get_template_directory_uri() . '/dist/main.js',
         array(),
         filemtime(get_template_directory() . '/dist/main.js'),

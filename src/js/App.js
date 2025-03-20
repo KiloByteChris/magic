@@ -1,4 +1,5 @@
 import Test from "./test.js";
+import '../scss/main.scss'; // This triggers Webpack to compile SCSS
 
 class App {
 	constructor() {
